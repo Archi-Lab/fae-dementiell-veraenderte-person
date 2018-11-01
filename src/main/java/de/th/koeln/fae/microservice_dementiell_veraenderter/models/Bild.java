@@ -1,7 +1,10 @@
 package de.th.koeln.fae.microservice_dementiell_veraenderter.models;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
 @Embeddable
 public class Bild {
+
+    @OneToOne(mappedBy = "bild")
+    private DementiellVeraenderter dementiellVeraenderter;
 }

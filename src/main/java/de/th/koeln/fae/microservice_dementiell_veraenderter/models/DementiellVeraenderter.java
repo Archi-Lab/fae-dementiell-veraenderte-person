@@ -20,6 +20,8 @@ public class DementiellVeraenderter {
     private List<Ereignis> ereignisse;
 
     @Embedded
+    @OneToOne
+    @JoinColumn
     private Bild bild;
 
     @ElementCollection(targetClass = Position.class)
