@@ -6,13 +6,21 @@ import java.util.List;
 @Entity
 public class DementiellVeraenderter {
 
+    private String forename;
+    private String surname;
+    private int age;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ElementCollection(targetClass = Faehigkeit.class)
-    @OneToMany
+    @ManyToMany
     private List<Faehigkeit> faehigkeiten;
+
+/*    @ElementCollection(targetClass = Faehigkeit.class)
+    @ManyToMany
+    private List<Faehigkeit> nicht_faehigkeiten;*/
 
     @Embedded
     @OneToOne
@@ -37,6 +45,30 @@ public class DementiellVeraenderter {
     private List<Kalendereintrag> kalendereintraege;
 
     public DementiellVeraenderter() {
+    }
+
+    public String getForename() {
+        return forename;
+    }
+
+    public void setForename(String forename) {
+        this.forename = forename;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public Long getId() {
@@ -89,5 +121,14 @@ public class DementiellVeraenderter {
 
     public void setKalendereintraege(List<Kalendereintrag> kalendereintraege) {
         this.kalendereintraege = kalendereintraege;
+    }
+
+    @Override
+    public String toString() {
+        return "DementiellVeraenderter{" +
+                "forename='" + forename + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age=" + age +
+                '}';
     }
 }
