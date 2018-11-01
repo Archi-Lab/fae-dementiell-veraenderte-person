@@ -7,6 +7,10 @@ public class Bild {
 
     private String pfad;
 
+    public Bild(){
+
+    }
+
     public Bild(String pfad) {
         this.pfad = pfad;
     }

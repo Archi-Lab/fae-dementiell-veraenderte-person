@@ -9,6 +9,10 @@ public class Ereignis {
     private Timestamp timestamp;
     private String beschreibung;
 
+    public  Ereignis(){
+
+    }
+
     public Ereignis(Timestamp timestamp, String beschreibung) {
         this.timestamp = timestamp;
         this.beschreibung = beschreibung;

@@ -7,6 +7,10 @@ public class Einwilligung {
 
     private String text;
 
+    public Einwilligung(){
+
+    }
+
     public Einwilligung(String text) {
         this.text = text;
     }

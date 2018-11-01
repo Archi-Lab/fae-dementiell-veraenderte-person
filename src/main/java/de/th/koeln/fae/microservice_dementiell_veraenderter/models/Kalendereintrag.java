@@ -10,6 +10,10 @@ public class Kalendereintrag {
     private String description;
     private Timestamp timestamp;
 
+    public Kalendereintrag(){
+
+    }
+
     public Kalendereintrag(String title, String description, Timestamp timestamp) {
         this.title = title;
         this.description = description;

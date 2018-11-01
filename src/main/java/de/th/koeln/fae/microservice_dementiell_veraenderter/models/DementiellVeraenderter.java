@@ -19,33 +19,24 @@ public class DementiellVeraenderter {
     private Long id;
 
     @ElementCollection(targetClass = Faehigkeit.class)
-    @ManyToMany
     private List<Faehigkeit> faehigkeiten;
 
 /*    @ElementCollection(targetClass = Faehigkeit.class)
-    @ManyToMany
     private List<Faehigkeit> nicht_faehigkeiten;*/
 
     @Embedded
-    @OneToOne
-    @JoinColumn
     private Einwilligung einwilligung;
 
     @ElementCollection(targetClass = Ereignis.class)
-    @OneToMany
     private List<Ereignis> ereignisse;
 
     @Embedded
-    @OneToOne
-    @JoinColumn
     private Bild bild;
 
     @ElementCollection(targetClass = Position.class)
-    @OneToMany
     private List<Position> positionsdaten;
 
     @ElementCollection(targetClass = Kalendereintrag.class)
-    @OneToMany
     private List<Kalendereintrag> kalendereintraege;
 
     public String getForename() {
