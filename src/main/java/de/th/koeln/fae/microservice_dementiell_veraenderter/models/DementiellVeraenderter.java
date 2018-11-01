@@ -1,6 +1,7 @@
 package de.th.koeln.fae.microservice_dementiell_veraenderter.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -9,6 +10,9 @@ public class DementiellVeraenderter {
     private String forename;
     private String surname;
     private int age;
+
+    public DementiellVeraenderter() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,9 +47,6 @@ public class DementiellVeraenderter {
     @ElementCollection(targetClass = Kalendereintrag.class)
     @OneToMany
     private List<Kalendereintrag> kalendereintraege;
-
-    public DementiellVeraenderter() {
-    }
 
     public String getForename() {
         return forename;
