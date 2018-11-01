@@ -105,5 +105,15 @@ public class DVPTest {
         dvpRepository.findById(dvp.getId()).get().setAge(90);
 
 
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getAge(), 90);
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getForename(), "Maximilian");
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getSurname(), "Muster");
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getBild(), "Neuer Pfad");
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getEinwilligung(), "Ich möchte das vielleicht.");
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getFaehigkeiten(), dvp.getFaehigkeiten());
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getPositionsdaten(), dvp.getPositionsdaten());
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getKalendereintraege(), dvp.getKalendereintraege());
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getEreignisse(), dvp.getEreignisse());
+
     }
 }
