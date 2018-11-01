@@ -99,21 +99,55 @@ public class DVPTest {
 
         DementiellVeraenderter dvp = initializeDVP();
 
-        final DementiellVeraenderter savedDVP = this.dvpRepository.save(dvp);
+        this.dvpRepository.save(dvp);
 
+        LOGGER.info("DVP to update: " + dvp.toString());
+
+        dvpRepository.findById(dvp.getId()).get().setForename("Maximilian");
+        dvpRepository.findById(dvp.getId()).get().setSurname("Muster");
         dvpRepository.findById(dvp.getId()).get().setBild(new Bild("Neuer Pfad"));
         dvpRepository.findById(dvp.getId()).get().setAge(90);
+        dvpRepository.findById(dvp.getId()).get().setEinwilligung(new Einwilligung("Ich möchte das vielleicht."));
+        dvp.getFaehigkeiten().add(new Faehigkeit("Auto fahren", "Lieber nicht."));
+        dvpRepository.findById(dvp.getId()).get().setFaehigkeiten(dvp.getFaehigkeiten());
+        dvp.getEreignisse().add(new Ereignis(new Timestamp(System.currentTimeMillis()), "Beschreibung"));
+        dvpRepository.findById(dvp.getId()).get().setEreignisse(dvp.getEreignisse());
+        dvp.getKalendereintraege().add(new Kalendereintrag("Zahnarzt", "Zähne ansehen", new Timestamp(System.currentTimeMillis())));
+        dvpRepository.findById(dvp.getId()).get().setKalendereintraege(dvp.getKalendereintraege());
+        dvp.getPositionsdaten().add(new Position(938383, 393939, new Timestamp(System.currentTimeMillis())));
+        dvpRepository.findById(dvp.getId()).get().setPositionsdaten(dvp.getPositionsdaten());
 
 
         assertEquals(dvpRepository.findById(dvp.getId()).get().getAge(), 90);
         assertEquals(dvpRepository.findById(dvp.getId()).get().getForename(), "Maximilian");
         assertEquals(dvpRepository.findById(dvp.getId()).get().getSurname(), "Muster");
-        assertEquals(dvpRepository.findById(dvp.getId()).get().getBild(), "Neuer Pfad");
-        assertEquals(dvpRepository.findById(dvp.getId()).get().getEinwilligung(), "Ich möchte das vielleicht.");
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getBild().getPfad(), "Neuer Pfad");
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getEinwilligung().getText(), "Ich möchte das vielleicht.");
         assertEquals(dvpRepository.findById(dvp.getId()).get().getFaehigkeiten(), dvp.getFaehigkeiten());
         assertEquals(dvpRepository.findById(dvp.getId()).get().getPositionsdaten(), dvp.getPositionsdaten());
         assertEquals(dvpRepository.findById(dvp.getId()).get().getKalendereintraege(), dvp.getKalendereintraege());
         assertEquals(dvpRepository.findById(dvp.getId()).get().getEreignisse(), dvp.getEreignisse());
+
+        LOGGER.info("DVP was updated: " + dvp.toString());
+
+    }
+
+    @Test
+    public void deleteDVP(){
+
+        DementiellVeraenderter dvp = initializeDVP();
+
+        final DementiellVeraenderter savedDVP = this.dvpRepository.save(dvp);
+
+        LOGGER.info("DVP to delete: " + dvp.toString());
+
+        assertNotNull(savedDVP);
+
+        this.dvpRepository.deleteById(savedDVP.getId());
+
+        assertEquals(dvpRepository.findById(savedDVP.getId()).isPresent(), false);
+
+        LOGGER.info("DVP deleted: " + dvp.toString());
 
     }
 }
