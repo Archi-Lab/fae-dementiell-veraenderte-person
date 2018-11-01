@@ -5,6 +5,4 @@ import javax.persistence.*;
 @Embeddable
 public class Bild {
 
-    @OneToOne(mappedBy = "bild")
-    private DementiellVeraenderter dementiellVeraenderter;
 }
