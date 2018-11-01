@@ -1,4 +1,7 @@
 package de.th.koeln.fae.microservice_dementiell_veraenderter.models;
 
-public class EventLog {
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class Bild {
 }
