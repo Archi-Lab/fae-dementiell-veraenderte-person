@@ -27,12 +27,10 @@ public class DVPTest {
     @Autowired
     private DVPRepository dvpRepository;
 
-    @Test
-    public void crudDVP() {
+    private DementiellVeraenderter initializeDVP(){
 
         final DementiellVeraenderter dvp = new DementiellVeraenderter();
 
-        //Create Lists
         List<Ereignis> ereignisList = new ArrayList<Ereignis>();
         ereignisList.add(new Ereignis(new Timestamp(System.currentTimeMillis()), "Beschreibung"));
 
@@ -55,8 +53,28 @@ public class DVPTest {
         dvp.setKalendereintraege(kalendereintragList);
         dvp.setPositionsdaten(positionList);
 
-        LOGGER.info("DVP saved: ");
-        LOGGER.info(dvp.toString());
+        return dvp;
+    }
+
+    @Test
+    public void createDVP(){
+        DementiellVeraenderter dvp = initializeDVP();
+
+        LOGGER.info("DVP to create: " + dvp.toString());
+
+        final DementiellVeraenderter savedDVP = this.dvpRepository.save(dvp);
+
+        assertNotNull(savedDVP);
+
+        LOGGER.info("DVP was successfully created: " + dvp.toString());
+    }
+
+    @Test
+    public void readDVP() {
+
+        DementiellVeraenderter dvp = initializeDVP();
+
+        LOGGER.info("DVP to read: " + dvp.toString());
 
         final DementiellVeraenderter savedDVP = this.dvpRepository.save(dvp);
 
@@ -71,8 +89,21 @@ public class DVPTest {
         assertEquals(dvp.getKalendereintraege(), savedDVP.getKalendereintraege());
         assertEquals(dvp.getPositionsdaten(), savedDVP.getPositionsdaten());
 
-        LOGGER.info("DVP was saved: ");
-        LOGGER.info(savedDVP.toString());
+        LOGGER.info("DVP was read: " + savedDVP.toString());
+
+        this.dvpRepository.findAllById(savedDVP.getId());
+    }
+
+    @Test
+    public void updateDVP(){
+
+        DementiellVeraenderter dvp = initializeDVP();
+
+        final DementiellVeraenderter savedDVP = this.dvpRepository.save(dvp);
+
+        dvpRepository.findById(dvp.getId()).get().setBild(new Bild("Neuer Pfad"));
+        dvpRepository.findById(dvp.getId()).get().setAge(90);
+
 
     }
 }
