@@ -1,15 +1,28 @@
 package de.th.koeln.fae.microservice_dementiell_veraenderter.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
 public class DementiellVeraenderter {
 
-    private String forename;
-    private String surname;
-    private int age;
+    @Embedded
+    @Getter
+    @Setter
+    private Vorname vorname;
+
+    @Embedded
+    @Getter
+    @Setter
+    private Nachname nachname;
+
+    @Embedded
+    @Getter
+    @Setter
+    private Alter alter;
 
     public DementiellVeraenderter() {
     }
@@ -28,39 +41,39 @@ public class DementiellVeraenderter {
     private Einwilligung einwilligung;
 
     @ElementCollection(targetClass = Ereignis.class)
-    private List<Ereignis> ereignisse;
+    private List<Ereignis> ereignisprotokoll;
 
     @Embedded
     private Bild bild;
 
     @ElementCollection(targetClass = Position.class)
-    private List<Position> positionsdaten;
+    private List<Position> bewegungsprofil;
 
     @ElementCollection(targetClass = Kalendereintrag.class)
     private List<Kalendereintrag> kalendereintraege;
 
-    public String getForename() {
-        return forename;
+    public Vorname getVorname() {
+        return vorname;
     }
 
-    public void setForename(String forename) {
-        this.forename = forename;
+    public void setVorname(Vorname vorname) {
+        this.vorname = vorname;
     }
 
-    public String getSurname() {
-        return surname;
+    public Nachname getNachname() {
+        return nachname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setNachname(Nachname nachname) {
+        this.nachname = nachname;
     }
 
-    public int getAge() {
-        return age;
+    public Alter getAlter() {
+        return alter;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setAlter(Alter alter) {
+        this.alter = alter;
     }
 
     public Long getId() {
@@ -83,12 +96,12 @@ public class DementiellVeraenderter {
         this.einwilligung = einwilligung;
     }
 
-    public List<Ereignis> getEreignisse() {
-        return ereignisse;
+    public List<Ereignis> getEreignisprotokoll() {
+        return ereignisprotokoll;
     }
 
-    public void setEreignisse(List<Ereignis> ereignisse) {
-        this.ereignisse = ereignisse;
+    public void setEreignisprotokoll(List<Ereignis> ereignisprotokoll) {
+        this.ereignisprotokoll = ereignisprotokoll;
     }
 
     public Bild getBild() {
@@ -99,12 +112,12 @@ public class DementiellVeraenderter {
         this.bild = bild;
     }
 
-    public List<Position> getPositionsdaten() {
-        return positionsdaten;
+    public List<Position> getBewegungsprofil() {
+        return bewegungsprofil;
     }
 
-    public void setPositionsdaten(List<Position> positionsdaten) {
-        this.positionsdaten = positionsdaten;
+    public void setBewegungsprofil(List<Position> bewegungsprofil) {
+        this.bewegungsprofil = bewegungsprofil;
     }
 
     public List<Kalendereintrag> getKalendereintraege() {
@@ -118,9 +131,9 @@ public class DementiellVeraenderter {
     @Override
     public String toString() {
         return "DementiellVeraenderter{" +
-                "forename='" + forename + '\'' +
-                ", surname='" + surname + '\'' +
-                ", age=" + age +
+                "vorname='" + vorname + '\'' +
+                ", nachname='" + nachname + '\'' +
+                ", alter=" + alter +
                 '}';
     }
 }

@@ -43,15 +43,15 @@ public class DVPTest {
         List<Position> positionList = new ArrayList<Position>();
         positionList.add(new Position(938383, 393939, new Timestamp(System.currentTimeMillis())));
 
-        dvp.setSurname("Mustermann");
-        dvp.setForename("Max");
-        dvp.setAge(89);
+        dvp.setNachname(new Nachname("Mustermann"));
+        dvp.setVorname(new Vorname("Max"));
+        dvp.setAlter(new Alter(89));
         dvp.setBild(new Bild("Pfad"));
         dvp.setEinwilligung(new Einwilligung("Ich moechte das nicht!"));
-        dvp.setEreignisse(ereignisList);
+        dvp.setEreignisprotokoll(ereignisList);
         dvp.setFaehigkeiten(faehigkeitList);
         dvp.setKalendereintraege(kalendereintragList);
-        dvp.setPositionsdaten(positionList);
+        dvp.setBewegungsprofil(positionList);
 
         return dvp;
     }
@@ -80,14 +80,14 @@ public class DVPTest {
 
         assertNotNull(savedDVP);
         assertNotNull(savedDVP.getId());
-        assertEquals(dvp.getSurname(), savedDVP.getSurname());
-        assertEquals(dvp.getForename(), savedDVP.getForename());
-        assertEquals(dvp.getAge(), savedDVP.getAge());
+        assertEquals(dvp.getNachname(), savedDVP.getNachname());
+        assertEquals(dvp.getVorname(), savedDVP.getVorname());
+        assertEquals(dvp.getAlter(), savedDVP.getAlter());
         assertEquals(dvp.getBild(), savedDVP.getBild());
         assertEquals(dvp.getEinwilligung(), savedDVP.getEinwilligung());
         assertEquals(dvp.getFaehigkeiten(), savedDVP.getFaehigkeiten());
         assertEquals(dvp.getKalendereintraege(), savedDVP.getKalendereintraege());
-        assertEquals(dvp.getPositionsdaten(), savedDVP.getPositionsdaten());
+        assertEquals(dvp.getBewegungsprofil(), savedDVP.getBewegungsprofil());
 
         LOGGER.info("DVP was read: " + savedDVP.toString());
 
@@ -103,30 +103,30 @@ public class DVPTest {
 
         LOGGER.info("DVP to update: " + dvp.toString());
 
-        dvpRepository.findById(dvp.getId()).get().setForename("Maximilian");
-        dvpRepository.findById(dvp.getId()).get().setSurname("Muster");
+        dvpRepository.findById(dvp.getId()).get().setVorname(new Vorname("Maximilian"));
+        dvpRepository.findById(dvp.getId()).get().setNachname(new Nachname("Muster"));
         dvpRepository.findById(dvp.getId()).get().setBild(new Bild("Neuer Pfad"));
-        dvpRepository.findById(dvp.getId()).get().setAge(90);
+        dvpRepository.findById(dvp.getId()).get().setAlter(new Alter(90));
         dvpRepository.findById(dvp.getId()).get().setEinwilligung(new Einwilligung("Ich möchte das vielleicht."));
         dvp.getFaehigkeiten().add(new Faehigkeit("Auto fahren", "Lieber nicht."));
         dvpRepository.findById(dvp.getId()).get().setFaehigkeiten(dvp.getFaehigkeiten());
-        dvp.getEreignisse().add(new Ereignis(new Timestamp(System.currentTimeMillis()), "Beschreibung"));
-        dvpRepository.findById(dvp.getId()).get().setEreignisse(dvp.getEreignisse());
+        dvp.getEreignisprotokoll().add(new Ereignis(new Timestamp(System.currentTimeMillis()), "Beschreibung"));
+        dvpRepository.findById(dvp.getId()).get().setEreignisprotokoll(dvp.getEreignisprotokoll());
         dvp.getKalendereintraege().add(new Kalendereintrag("Zahnarzt", "Zähne ansehen", new Timestamp(System.currentTimeMillis())));
         dvpRepository.findById(dvp.getId()).get().setKalendereintraege(dvp.getKalendereintraege());
-        dvp.getPositionsdaten().add(new Position(938383, 393939, new Timestamp(System.currentTimeMillis())));
-        dvpRepository.findById(dvp.getId()).get().setPositionsdaten(dvp.getPositionsdaten());
+        dvp.getBewegungsprofil().add(new Position(938383, 393939, new Timestamp(System.currentTimeMillis())));
+        dvpRepository.findById(dvp.getId()).get().setBewegungsprofil(dvp.getBewegungsprofil());
 
 
-        assertEquals(dvpRepository.findById(dvp.getId()).get().getAge(), 90);
-        assertEquals(dvpRepository.findById(dvp.getId()).get().getForename(), "Maximilian");
-        assertEquals(dvpRepository.findById(dvp.getId()).get().getSurname(), "Muster");
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getAlter(), 90);
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getVorname(), "Maximilian");
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getNachname(), "Muster");
         assertEquals(dvpRepository.findById(dvp.getId()).get().getBild().getPfad(), "Neuer Pfad");
         assertEquals(dvpRepository.findById(dvp.getId()).get().getEinwilligung().getText(), "Ich möchte das vielleicht.");
         assertEquals(dvpRepository.findById(dvp.getId()).get().getFaehigkeiten(), dvp.getFaehigkeiten());
-        assertEquals(dvpRepository.findById(dvp.getId()).get().getPositionsdaten(), dvp.getPositionsdaten());
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getBewegungsprofil(), dvp.getBewegungsprofil());
         assertEquals(dvpRepository.findById(dvp.getId()).get().getKalendereintraege(), dvp.getKalendereintraege());
-        assertEquals(dvpRepository.findById(dvp.getId()).get().getEreignisse(), dvp.getEreignisse());
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getEreignisprotokoll(), dvp.getEreignisprotokoll());
 
         LOGGER.info("DVP was updated: " + dvp.toString());
 
