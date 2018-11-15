@@ -1,10 +1,15 @@
 package de.th.koeln.fae.microservice_dementiell_veraenderter.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class Alter {
 
+    @Getter
+    @Setter
     private int alter;
 
     public Alter(){

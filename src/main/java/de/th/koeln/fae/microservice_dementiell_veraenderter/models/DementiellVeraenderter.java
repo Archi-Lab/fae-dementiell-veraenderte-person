@@ -29,7 +29,7 @@ public class DementiellVeraenderter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     @ElementCollection(targetClass = Faehigkeit.class)
     private List<Faehigkeit> faehigkeiten;
