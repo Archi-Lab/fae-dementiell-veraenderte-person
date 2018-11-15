@@ -41,6 +41,9 @@ public class DementiellVeraenderterController {
 
         resources.add(linkTo(methodOn(DementiellVeraenderterController.class).getDVPs()).withSelfRel());
         resources.add(linkTo(methodOn(DementiellVeraenderterController.class).postDVP(null)).withRel("create"));
+
+        //foreach --> person in personlist {resources.add(..(withRel("dvp"+person.getid));}
+
         //resources.add(linkTo(methodOn(DementiellVeraenderterController.class).getKalender()).withSelfRel());
 
         LOGGER.info("RETURN ALL PERSONS!");
@@ -63,10 +66,33 @@ public class DementiellVeraenderterController {
         return new ResponseEntity<>(dvp.getKalendereintraege(), HttpStatus.OK);
     }
 
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                              POST MAPPINGS                                                                     //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @PostMapping(path = "/dvps")
-    public DementiellVeraenderter postDVP(@RequestBody DementiellVeraenderter newDVP){
+    public ResponseEntity<DementiellVeraenderter> postDVP(@RequestBody DementiellVeraenderter newDVP){
 
         LOGGER.info("CREATED NEW PERSON!");
-        return  dvpRepository.save(newDVP);
+        return new ResponseEntity<>(dvpRepository.save(newDVP), HttpStatus.CREATED);
+    }
+
+    @PostMapping(path = "/dvps/{dvpid}/appoints")
+    public ResponseEntity<List<Kalendereintrag>> postKalendereintrag(@PathVariable("dvpid") long dvpId, @RequestBody Kalendereintrag newKalendereintrag){
+
+        final DementiellVeraenderter dvp;
+        if(this.dvpRepository.findById(dvpId).isPresent()) {
+            LOGGER.info("DVP GEFUNDEN!");
+            dvp = this.dvpRepository.findById(dvpId).get();
+        }
+        else
+            return null;
+        List<Kalendereintrag> kalendereintraege = dvp.getKalendereintraege();
+        kalendereintraege.add(newKalendereintrag);
+        dvp.setKalendereintraege(kalendereintraege);
+        dvpRepository.save(dvp);
+
+        LOGGER.info("CREATED NEW KALENDEREINTRAG!");
+        return new ResponseEntity<>(dvp.getKalendereintraege(), HttpStatus.CREATED);
     }
 }
