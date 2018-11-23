@@ -7,7 +7,11 @@ import net.bytebuddy.asm.Advice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.ResourceProcessor;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,15 +36,31 @@ public class DementiellVeraenderterController {
         this.dvpRepository = dvpRepository;
     }
 
+    @Bean
+    public ResourceProcessor<Resources<DementiellVeraenderter>> personProcessor() {
 
-    @GetMapping(path = "/dvps")
+        return new ResourceProcessor<Resources<DementiellVeraenderter>>() {
+
+            @Override
+            public Resources<DementiellVeraenderter> process(Resources<DementiellVeraenderter> resource) {
+                    //resource.add(new Link(resource.getLink(Link.REL_SELF).getHref() + "/appoints",
+                    //        "kalender"));
+                    resource.add(new Link(resource.getLink(Link.REL_SELF).getHref() + "dvps/{dvpid}", "dvp"));
+
+                return resource;
+            }
+        };
+    }
+
+
+   @GetMapping(path = "/dvps")
     public ResponseEntity<?> getDVPs(){
         final Iterable<DementiellVeraenderter> personList = this.dvpRepository.findAll();
 
         Resources<DementiellVeraenderter> resources = new Resources<>(personList);
 
         resources.add(linkTo(methodOn(DementiellVeraenderterController.class).getDVPs()).withSelfRel());
-        resources.add(linkTo(methodOn(DementiellVeraenderterController.class).postDVP(null)).withRel("create"));
+        //resources.add(linkTo(methodOn(DementiellVeraenderterController.class).postDVP(null)).withRel("create"));
 
         //foreach --> person in personlist {resources.add(..(withRel("dvp"+person.getid));}
 
