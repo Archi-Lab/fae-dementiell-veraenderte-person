@@ -40,6 +40,9 @@ public class DVPTest {
         List<Kalendereintrag> kalendereintragList = new ArrayList<Kalendereintrag>();
         kalendereintragList.add(new Kalendereintrag("Zahnarzt", "Zähne ansehen", new Timestamp(System.currentTimeMillis())));
 
+        Kalender kalender=new Kalender();
+        kalender.setKalendereintraege(kalendereintragList);
+
         List<Position> positionList = new ArrayList<Position>();
         positionList.add(new Position(938383, 393939, new Timestamp(System.currentTimeMillis())));
 
@@ -50,7 +53,7 @@ public class DVPTest {
         dvp.setEinwilligung(new Einwilligung("Ich moechte das nicht!"));
         dvp.setEreignisprotokoll(ereignisList);
         dvp.setFaehigkeiten(faehigkeitList);
-        dvp.setKalendereintraege(kalendereintragList);
+        dvp.setKalender(kalender);
         dvp.setBewegungsprofil(positionList);
 
         return dvp;
@@ -86,7 +89,7 @@ public class DVPTest {
         assertEquals(dvp.getBild(), savedDVP.getBild());
         assertEquals(dvp.getEinwilligung(), savedDVP.getEinwilligung());
         assertEquals(dvp.getFaehigkeiten(), savedDVP.getFaehigkeiten());
-        assertEquals(dvp.getKalendereintraege(), savedDVP.getKalendereintraege());
+        assertEquals(dvp.getKalender(), savedDVP.getKalender());
         assertEquals(dvp.getBewegungsprofil(), savedDVP.getBewegungsprofil());
 
         LOGGER.info("DVP was read: " + savedDVP.toString());
@@ -112,8 +115,8 @@ public class DVPTest {
         dvpRepository.findById(dvp.getId()).get().setFaehigkeiten(dvp.getFaehigkeiten());
         dvp.getEreignisprotokoll().add(new Ereignis(new Timestamp(System.currentTimeMillis()), "Beschreibung"));
         dvpRepository.findById(dvp.getId()).get().setEreignisprotokoll(dvp.getEreignisprotokoll());
-        dvp.getKalendereintraege().add(new Kalendereintrag("Zahnarzt", "Zähne ansehen", new Timestamp(System.currentTimeMillis())));
-        dvpRepository.findById(dvp.getId()).get().setKalendereintraege(dvp.getKalendereintraege());
+        dvp.getKalender().getKalendereintraege().add(new Kalendereintrag("Zahnarzt", "Zähne ansehen", new Timestamp(System.currentTimeMillis())));
+        dvpRepository.findById(dvp.getId()).get().getKalender().setKalendereintraege(dvp.getKalender().getKalendereintraege());
         dvp.getBewegungsprofil().add(new Position(938383, 393939, new Timestamp(System.currentTimeMillis())));
         dvpRepository.findById(dvp.getId()).get().setBewegungsprofil(dvp.getBewegungsprofil());
 
@@ -125,7 +128,7 @@ public class DVPTest {
         assertEquals(dvpRepository.findById(dvp.getId()).get().getEinwilligung().getText(), "Ich möchte das vielleicht.");
         assertEquals(dvpRepository.findById(dvp.getId()).get().getFaehigkeiten(), dvp.getFaehigkeiten());
         assertEquals(dvpRepository.findById(dvp.getId()).get().getBewegungsprofil(), dvp.getBewegungsprofil());
-        assertEquals(dvpRepository.findById(dvp.getId()).get().getKalendereintraege(), dvp.getKalendereintraege());
+        assertEquals(dvpRepository.findById(dvp.getId()).get().getKalender().getKalendereintraege(), dvp.getKalender().getKalendereintraege());
         assertEquals(dvpRepository.findById(dvp.getId()).get().getEreignisprotokoll(), dvp.getEreignisprotokoll());
 
         LOGGER.info("DVP was updated: " + dvp.toString());

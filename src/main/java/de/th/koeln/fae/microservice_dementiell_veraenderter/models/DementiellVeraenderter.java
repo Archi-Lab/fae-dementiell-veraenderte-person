@@ -49,8 +49,13 @@ public class DementiellVeraenderter {
     @ElementCollection(targetClass = Position.class)
     private List<Position> bewegungsprofil;
 
+    /*
     @ElementCollection(targetClass = Kalendereintrag.class)
     private List<Kalendereintrag> kalendereintraege;
+    */
+
+    @Embedded
+    private Kalender kalender;
 
     public Vorname getVorname() {
         return vorname;
@@ -120,12 +125,21 @@ public class DementiellVeraenderter {
         this.bewegungsprofil = bewegungsprofil;
     }
 
+    /*
     public List<Kalendereintrag> getKalendereintraege() {
         return kalendereintraege;
     }
 
     public void setKalendereintraege(List<Kalendereintrag> kalendereintraege) {
         this.kalendereintraege = kalendereintraege;
+    }*/
+
+    public Kalender getKalender() {
+        return kalender;
+    }
+
+    public void setKalender(Kalender kalender) {
+        this.kalender = kalender;
     }
 
     @Override
