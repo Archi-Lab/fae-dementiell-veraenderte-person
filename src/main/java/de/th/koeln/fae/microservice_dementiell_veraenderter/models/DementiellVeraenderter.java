@@ -2,6 +2,7 @@ package de.th.koeln.fae.microservice_dementiell_veraenderter.models;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.util.List;
@@ -49,9 +50,14 @@ public class DementiellVeraenderter {
     @ElementCollection(targetClass = Position.class)
     private List<Position> bewegungsprofil;
 
+    @OneToOne(optional=false,fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name="kalender_id", referencedColumnName = "id")
+    @RestResource(path="appoints",rel="kalender")
+    private Kalender kalender;
+/*
     @ElementCollection(targetClass = Kalendereintrag.class)
     private List<Kalendereintrag> kalendereintraege;
-
+*/
     public Vorname getVorname() {
         return vorname;
     }
@@ -119,7 +125,7 @@ public class DementiellVeraenderter {
     public void setBewegungsprofil(List<Position> bewegungsprofil) {
         this.bewegungsprofil = bewegungsprofil;
     }
-
+/*
     public List<Kalendereintrag> getKalendereintraege() {
         return kalendereintraege;
     }
@@ -127,7 +133,7 @@ public class DementiellVeraenderter {
     public void setKalendereintraege(List<Kalendereintrag> kalendereintraege) {
         this.kalendereintraege = kalendereintraege;
     }
-
+*/
     @Override
     public String toString() {
         return "DementiellVeraenderter{" +
@@ -135,5 +141,13 @@ public class DementiellVeraenderter {
                 ", nachname='" + nachname + '\'' +
                 ", alter=" + alter +
                 '}';
+    }
+
+    public Kalender getKalender() {
+        return kalender;
+    }
+
+    public void setKalender(Kalender kalender) {
+        this.kalender = kalender;
     }
 }

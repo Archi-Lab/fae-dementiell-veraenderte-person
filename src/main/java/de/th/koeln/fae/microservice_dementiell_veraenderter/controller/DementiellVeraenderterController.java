@@ -52,7 +52,7 @@ public class DementiellVeraenderterController {
         };
     }
 
-
+/*
    @GetMapping(path = "/dvps")
     public ResponseEntity<?> getDVPs(){
         final Iterable<DementiellVeraenderter> personList = this.dvpRepository.findAll();
@@ -115,4 +115,5 @@ public class DementiellVeraenderterController {
         LOGGER.info("CREATED NEW KALENDEREINTRAG!");
         return new ResponseEntity<>(dvp.getKalendereintraege(), HttpStatus.CREATED);
     }
+    */
 }

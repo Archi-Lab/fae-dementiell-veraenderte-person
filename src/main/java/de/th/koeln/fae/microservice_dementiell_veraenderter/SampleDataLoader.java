@@ -20,6 +20,8 @@ public class SampleDataLoader implements ApplicationListener<ContextRefreshedEve
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         final DementiellVeraenderter dvp = new DementiellVeraenderter();
+        final Kalender kalender = new Kalender();
+
 
         List<Ereignis> ereignisList = new ArrayList<Ereignis>();
         ereignisList.add(new Ereignis(new Timestamp(System.currentTimeMillis()), "Beschreibung"));
@@ -29,6 +31,8 @@ public class SampleDataLoader implements ApplicationListener<ContextRefreshedEve
 
         List<Kalendereintrag> kalendereintragList = new ArrayList<Kalendereintrag>();
         kalendereintragList.add(new Kalendereintrag("Zahnarzt", "Zähne ansehen", new Timestamp(System.currentTimeMillis())));
+
+        kalender.setKalendereintraege(kalendereintragList);
 
         List<Position> positionList = new ArrayList<Position>();
         positionList.add(new Position(938383, 393939, new Timestamp(System.currentTimeMillis())));
@@ -40,7 +44,7 @@ public class SampleDataLoader implements ApplicationListener<ContextRefreshedEve
         dvp.setEinwilligung(new Einwilligung("Ich moechte das nicht!"));
         dvp.setEreignisprotokoll(ereignisList);
         dvp.setFaehigkeiten(faehigkeitList);
-        dvp.setKalendereintraege(kalendereintragList);
+        dvp.setKalender(kalender);
         dvp.setBewegungsprofil(positionList);
 
         final DementiellVeraenderter savedDvp = this.dvpRepository.save(dvp);
