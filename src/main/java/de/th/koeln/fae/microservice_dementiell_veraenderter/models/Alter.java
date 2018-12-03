@@ -25,4 +25,8 @@ public class Alter {
         this.alter = alter;
     }
 
+    @Override
+    public boolean equals(Object other){
+        return other.getClass() == this.getClass() && ((Alter)other).alter == this.alter;
+    }
 }

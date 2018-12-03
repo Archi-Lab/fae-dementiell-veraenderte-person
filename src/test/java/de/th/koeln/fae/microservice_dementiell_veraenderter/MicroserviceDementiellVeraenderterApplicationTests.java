@@ -13,5 +13,4 @@ public class MicroserviceDementiellVeraenderterApplicationTests{
     public void contextLoads() {
 
     }
-
 }

@@ -31,12 +31,6 @@ public class DementiellVeraenderter {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ElementCollection(targetClass = Faehigkeit.class)
-    private List<Faehigkeit> faehigkeiten;
-
-/*    @ElementCollection(targetClass = Faehigkeit.class)
-    private List<Faehigkeit> nicht_faehigkeiten;*/
-
     @Embedded
     private Einwilligung einwilligung;
 
@@ -46,51 +40,8 @@ public class DementiellVeraenderter {
     @Embedded
     private Bild bild;
 
-    @ElementCollection(targetClass = Position.class)
-    private List<Position> bewegungsprofil;
-
-    /*
-    @ElementCollection(targetClass = Kalendereintrag.class)
-    private List<Kalendereintrag> kalendereintraege;
-    */
-
-    @Embedded
-    private Kalender kalender;
-
-    public Vorname getVorname() {
-        return vorname;
-    }
-
-    public void setVorname(Vorname vorname) {
-        this.vorname = vorname;
-    }
-
-    public Nachname getNachname() {
-        return nachname;
-    }
-
-    public void setNachname(Nachname nachname) {
-        this.nachname = nachname;
-    }
-
-    public Alter getAlter() {
-        return alter;
-    }
-
-    public void setAlter(Alter alter) {
-        this.alter = alter;
-    }
-
     public Long getId() {
         return id;
-    }
-
-    public List<Faehigkeit> getFaehigkeiten() {
-        return faehigkeiten;
-    }
-
-    public void setFaehigkeiten(List<Faehigkeit> faehigkeiten) {
-        this.faehigkeiten = faehigkeiten;
     }
 
     public Einwilligung getEinwilligung() {
@@ -115,31 +66,6 @@ public class DementiellVeraenderter {
 
     public void setBild(Bild bild) {
         this.bild = bild;
-    }
-
-    public List<Position> getBewegungsprofil() {
-        return bewegungsprofil;
-    }
-
-    public void setBewegungsprofil(List<Position> bewegungsprofil) {
-        this.bewegungsprofil = bewegungsprofil;
-    }
-
-    /*
-    public List<Kalendereintrag> getKalendereintraege() {
-        return kalendereintraege;
-    }
-
-    public void setKalendereintraege(List<Kalendereintrag> kalendereintraege) {
-        this.kalendereintraege = kalendereintraege;
-    }*/
-
-    public Kalender getKalender() {
-        return kalender;
-    }
-
-    public void setKalender(Kalender kalender) {
-        this.kalender = kalender;
     }
 
     @Override

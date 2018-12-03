@@ -31,4 +31,9 @@ public class Vorname {
                 "vorname='" + vorname + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object other){
+        return other.getClass() == this.getClass() && ((Vorname) other).vorname.equals(this.vorname);
+    }
 }

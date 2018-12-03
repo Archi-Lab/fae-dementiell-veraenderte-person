@@ -23,4 +23,16 @@ public class Nachname {
         }
         this.nachname = nachname;
     }
+
+    @Override
+    public String toString() {
+        return "Nachname{" +
+                "nachname='" + nachname + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object other){
+        return other.getClass() == this.getClass() && ((Nachname) other).nachname.equals(this.nachname);
+    }
 }
