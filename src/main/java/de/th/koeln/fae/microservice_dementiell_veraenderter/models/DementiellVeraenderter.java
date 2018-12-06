@@ -1,8 +1,5 @@
 package de.th.koeln.fae.microservice_dementiell_veraenderter.models;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,18 +7,12 @@ import java.util.List;
 public class DementiellVeraenderter {
 
     @Embedded
-    @Getter
-    @Setter
     private Vorname vorname;
 
     @Embedded
-    @Getter
-    @Setter
     private Nachname nachname;
 
     @Embedded
-    @Getter
-    @Setter
     private Alter alter;
 
     public DementiellVeraenderter() {
@@ -39,6 +30,18 @@ public class DementiellVeraenderter {
 
     @Embedded
     private Bild bild;
+
+    public Vorname getVorname() { return vorname; }
+
+    public void setVorname(Vorname vorname) { this.vorname = vorname; }
+
+    public Nachname getNachname() { return nachname; }
+
+    public void setNachname(Nachname nachname) { this.nachname = nachname; }
+
+    public Alter getAlter() { return alter; }
+
+    public void setAlter(Alter alter) { this.alter = alter; }
 
     public Long getId() {
         return id;
