@@ -6,20 +6,20 @@ import java.util.UUID;
 @Embeddable
 public class Tracker {
 
-    public UUID id;
+    public UUID key;
 
     public Tracker() {
     }
 
-    public Tracker(UUID id) {
-        this.id = id;
+    public Tracker(UUID key) {
+        this.key = key;
     }
 
-    public UUID getId() {
-        return id;
+    public UUID getKey() {
+        return key;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setKey(UUID key) {
+        this.key = key;
     }
 }

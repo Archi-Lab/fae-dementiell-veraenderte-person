@@ -26,8 +26,8 @@ public class DementiellVeraenderter {
     }
 
     @Id
-    @GenericGenerator(name="uuid", strategy = "uuid2")
-    private UUID id;
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    private Long id;
 
     @Embedded
     private Einwilligung einwilligung;
@@ -61,7 +61,7 @@ public class DementiellVeraenderter {
 
     public void setAlter(Alter alter) { this.alter = alter; }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
