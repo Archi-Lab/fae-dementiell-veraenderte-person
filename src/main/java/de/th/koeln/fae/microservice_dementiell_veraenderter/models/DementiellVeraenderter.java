@@ -1,10 +1,17 @@
 package de.th.koeln.fae.microservice_dementiell_veraenderter.models;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class DementiellVeraenderter {
+
+    private static final Logger log = LoggerFactory.getLogger(DementiellVeraenderter.class);
 
     @Embedded
     private Vorname vorname;
@@ -19,8 +26,8 @@ public class DementiellVeraenderter {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GenericGenerator(name="uuid", strategy = "uuid2")
+    private UUID id;
 
     @Embedded
     private Einwilligung einwilligung;
@@ -30,6 +37,17 @@ public class DementiellVeraenderter {
 
     @Embedded
     private Bild bild;
+
+    @Embedded
+    private Tracker tracker;
+
+    public Tracker getTracker() {
+        return tracker;
+    }
+
+    public void setTracker(Tracker tracker) {
+        this.tracker = tracker;
+    }
 
     public Vorname getVorname() { return vorname; }
 
@@ -43,7 +61,7 @@ public class DementiellVeraenderter {
 
     public void setAlter(Alter alter) { this.alter = alter; }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 

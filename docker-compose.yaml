@@ -9,6 +9,8 @@ services:
     - 8080:8080
     networks:
     - dvp_ms_db
+    #- fae-message-broker_backend
+    - fae-message-broker_kafka-broker_backend
   # Spezifikation der Datenbank
   dvp_db:
     image: postgres:10.1 # Basis Image
@@ -28,3 +30,5 @@ volumes: # Allgemeine Volumes für das Projekt
 networks:
   dvp_ms_db:
     driver: bridge
+  fae-message-broker_kafka-broker_backend:
+    external: true

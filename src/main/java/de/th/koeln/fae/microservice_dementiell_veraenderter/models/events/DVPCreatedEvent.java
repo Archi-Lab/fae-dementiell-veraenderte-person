@@ -5,46 +5,55 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.th.koeln.fae.microservice_dementiell_veraenderter.models.DementiellVeraenderter;
 
+import java.time.Instant;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
-public class DVPCreateEvent implements DVPEvent{
+public class DVPCreatedEvent implements DVPEvent{
 
-    public DVPCreateEvent(DementiellVeraenderter dvp){
-        
+    final UUID id;
+    final DementiellVeraenderter dvp;
+    final Instant instant;
+
+    public DVPCreatedEvent(DementiellVeraenderter dvp){
+        this.id = UUID.randomUUID();
+        this.dvp = dvp;
+        this.instant = Instant.now();
     }
 
     @Override
     public String getId() {
-        return null;
+        return id.toString();
     }
 
     @Override
     public String getKey() {
-        return null;
+        return dvp.getId().toString();
     }
 
     @Override
     public Long getVersion() {
-        return null;
+        return 0L;
     }
 
     @Override
     public ZonedDateTime getTime() {
-        return null;
+        return instant.atZone(ZoneId.systemDefault());
     }
 
     @Override
     public byte[] getPayload(ObjectMapper objectMapper) throws JsonProcessingException {
-        return new byte[0];
+        return objectMapper.writeValueAsBytes(dvp);
     }
 
     @Override
     public Class<?> getEntityType() {
-        return null;
+        return dvp.getClass();
     }
 
     @Override
     public String getType() {
-        return null;
+        return "New Person Created";
     }
 }
