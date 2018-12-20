@@ -6,7 +6,7 @@ services:
     depends_on:
     - dvp_db
     ports:
-    - 8080:8080
+    - 8050:8050
     networks:
     - dvp_ms_db
     #- fae-message-broker_backend

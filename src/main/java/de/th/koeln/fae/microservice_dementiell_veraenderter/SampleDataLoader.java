@@ -1,5 +1,6 @@
 package de.th.koeln.fae.microservice_dementiell_veraenderter;
 
+import de.th.koeln.fae.microservice_dementiell_veraenderter.eventing.EventSource;
 import de.th.koeln.fae.microservice_dementiell_veraenderter.eventing.KafkaGateway;
 import de.th.koeln.fae.microservice_dementiell_veraenderter.models.*;
 import de.th.koeln.fae.microservice_dementiell_veraenderter.models.events.DVPCreatedEvent;
@@ -12,6 +13,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.support.TransactionSynchronizationAdapter;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -25,12 +28,17 @@ public class SampleDataLoader implements ApplicationListener<ContextRefreshedEve
     @Autowired
     private DVPRepository dvpRepository;
 
-    private final KafkaGateway eventPublisher;
-    private static final Logger log = LoggerFactory.getLogger(SampleDataLoader.class);
-    @Autowired
-    SampleDataLoader(final KafkaGateway eventPublisher){
-        this.eventPublisher = eventPublisher;
-    }
+//    private final KafkaGateway eventPublisher;
+//    private static final Logger log = LoggerFactory.getLogger(SampleDataLoader.class);
+//    @Autowired
+//    SampleDataLoader(final KafkaGateway eventPublisher){
+//        this.eventPublisher = eventPublisher;
+//    }rivate final KafkaGateway eventPublisher;
+//    private static final Logger log = LoggerFactory.getLogger(SampleDataLoader.class);
+//    @Autowired
+//    SampleDataLoader(final KafkaGateway eventPublisher){
+//        this.eventPublisher = eventPublisher;
+//    }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -49,15 +57,15 @@ public class SampleDataLoader implements ApplicationListener<ContextRefreshedEve
 
         final DementiellVeraenderter savedDvp = this.dvpRepository.save(dvp1);
 
-        DVPEvent dvpEvent = new DVPCreatedEvent(dvp1);
-        try {
-            SendResult<String, String> sendResult = eventPublisher.publishDVPEvent(dvpEvent)
-                    .get(1, TimeUnit.SECONDS);
-
-            log.info(sendResult.toString());
-        } catch (final Exception ex) {
-            log.info("An " + ex.getClass() + "occured!");
-        }
+//        DVPEvent dvpEvent = new DVPCreatedEvent(dvp1);
+//        try {
+//            SendResult<String, String> sendResult = eventPublisher.publishDVPEvent(dvpEvent)
+//                    .get(1, TimeUnit.SECONDS);
+//
+//            log.info(sendResult.toString());
+//        } catch (final Exception ex) {
+//            log.info("An " + ex.getClass() + "occured!");
+//        }
 
         /////////////////////////////////////////////
 
@@ -77,15 +85,15 @@ public class SampleDataLoader implements ApplicationListener<ContextRefreshedEve
 
         this.dvpRepository.save(dvp3);
 
-        dvpEvent = new DVPCreatedEvent(dvp3);
-        try {
-            SendResult<String, String> sendResult = eventPublisher.publishDVPEvent(dvpEvent)
-                    .get(1, TimeUnit.SECONDS);
-
-            log.info(sendResult.toString());
-        } catch (final Exception ex) {
-            log.info("An " + ex.getClass() + "occured!");
-        }
+//        dvpEvent = new DVPCreatedEvent(dvp3);
+//        try {
+//            SendResult<String, String> sendResult = eventPublisher.publishDVPEvent(dvpEvent)
+//                    .get(1, TimeUnit.SECONDS);
+//
+//            log.info(sendResult.toString());
+//        } catch (final Exception ex) {
+//            log.info("An " + ex.getClass() + "occured!");
+//        }
 
         /////////////////////////////////////////////////
 
@@ -105,14 +113,14 @@ public class SampleDataLoader implements ApplicationListener<ContextRefreshedEve
 
         this.dvpRepository.save(dvp2);
 
-        dvpEvent = new DVPCreatedEvent(dvp2);
-        try {
-            SendResult<String, String> sendResult = eventPublisher.publishDVPEvent(dvpEvent)
-                    .get(1, TimeUnit.SECONDS);
-
-            log.info(sendResult.toString());
-        } catch (final Exception ex) {
-            log.info("An " + ex.getClass() + "occured!");
-        }
+//        dvpEvent = new DVPCreatedEvent(dvp2);
+//        try {
+//            SendResult<String, String> sendResult = eventPublisher.publishDVPEvent(dvpEvent)
+//                    .get(1, TimeUnit.SECONDS);
+//
+//            log.info(sendResult.toString());
+//        } catch (final Exception ex) {
+//            log.info("An " + ex.getClass() + "occured!");
+//        }
     }
 }

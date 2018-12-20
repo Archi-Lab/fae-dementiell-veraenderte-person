@@ -1,15 +1,17 @@
 package de.th.koeln.fae.microservice_dementiell_veraenderter.models;
 
-import org.hibernate.annotations.GenericGenerator;
+import de.th.koeln.fae.microservice_dementiell_veraenderter.eventing.EventPublishingEntityListener;
+import de.th.koeln.fae.microservice_dementiell_veraenderter.eventing.EventSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
-public class DementiellVeraenderter {
+@EntityListeners(EventPublishingEntityListener.class)
+public class DementiellVeraenderter implements EventSource {
 
     private static final Logger log = LoggerFactory.getLogger(DementiellVeraenderter.class);
 
@@ -40,6 +42,9 @@ public class DementiellVeraenderter {
 
     @Embedded
     private Tracker tracker;
+
+    @Version
+    private Long version;
 
     public Tracker getTracker() {
         return tracker;
@@ -96,5 +101,19 @@ public class DementiellVeraenderter {
                 ", nachname='" + nachname + '\'' +
                 ", alter=" + alter +
                 '}';
+    }
+
+    @Override
+    public Long getVersion() {
+        return version;
+    }
+
+    @Override
+    public DementiellVeraenderter getDVP() {
+        try {
+            return (DementiellVeraenderter) super.clone();
+        }catch(Exception e){
+            return this;
+        }
     }
 }
