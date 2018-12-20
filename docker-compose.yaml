@@ -6,9 +6,9 @@ services:
     depends_on:
     - dvp_db
     ports:
-    - 8080:8080
+    - 8050:8050
     networks:
-    - dvp_ms_db
+    - fae-team-2-dementiell-veraenderte-person_dvp_ms_db
     #- fae-message-broker_backend
     - fae-message-broker_kafka-broker_backend
   # Spezifikation der Datenbank
@@ -24,11 +24,11 @@ services:
     - JAVA_TOOL_OPTIONS=-Xms128m -Xmx256m
     restart: always # Bei einem Absturz soll die DB immer neu starten.
     networks: # Netzwerk für die DB und dem Microservice
-    - dvp_ms_db
+    - fae-team-2-dementiell-veraenderte-person_dvp_ms_db
 volumes: # Allgemeine Volumes für das Projekt
   dvp_db: {}
 networks:
-  dvp_ms_db:
+  fae-team-2-dementiell-veraenderte-person_dvp_ms_db:
     driver: bridge
   fae-message-broker_kafka-broker_backend:
     external: true

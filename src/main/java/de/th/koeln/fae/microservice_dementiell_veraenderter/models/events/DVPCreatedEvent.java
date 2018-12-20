@@ -54,6 +54,6 @@ public class DVPCreatedEvent implements DVPEvent{
 
     @Override
     public String getType() {
-        return "New Person Created";
+        return "dvp-created";
     }
 }

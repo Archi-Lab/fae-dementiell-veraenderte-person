@@ -30,15 +30,11 @@ public class DVPTest {
     private DementiellVeraenderter initializeDVP(){
         final DementiellVeraenderter dvp = new DementiellVeraenderter();
 
-        List<Ereignis> ereignisList = new ArrayList<Ereignis>();
-        ereignisList.add(new Ereignis(new Timestamp(System.currentTimeMillis()), "Beschreibung"));
-
-        dvp.setNachname(new Nachname("Mustermann"));
+//        dvp.setNachname(new Nachname("Mustermann"));
         dvp.setVorname(new Vorname("Max"));
-        dvp.setAlter(new Alter(89));
-        dvp.setBild(new Bild("Pfad"));
-        dvp.setEinwilligung(new Einwilligung("Ich moechte das nicht!"));
-        dvp.setEreignisprotokoll(ereignisList);
+//        dvp.setAlter(new Alter(89));
+//        dvp.setBild(new Bild("Pfad"));
+//        dvp.setEinwilligung(new Einwilligung("Ich moechte das nicht!"));
 
         return dvp;
     }
@@ -66,11 +62,11 @@ public class DVPTest {
 
         assertNotNull(savedDVP);
         assertNotNull(savedDVP.getId());
-        assertEquals(dvp.getNachname(), savedDVP.getNachname());
+//        assertEquals(dvp.getNachname(), savedDVP.getNachname());
         assertEquals(dvp.getVorname(), savedDVP.getVorname());
-        assertEquals(dvp.getAlter(), savedDVP.getAlter());
-        assertEquals(dvp.getBild(), savedDVP.getBild());
-        assertEquals(dvp.getEinwilligung(), savedDVP.getEinwilligung());
+//        assertEquals(dvp.getAlter(), savedDVP.getAlter());
+//        assertEquals(dvp.getBild(), savedDVP.getBild());
+//        assertEquals(dvp.getEinwilligung(), savedDVP.getEinwilligung());
 
         LOGGER.info("DVP was read: " + savedDVP.toString());
 
@@ -86,20 +82,17 @@ public class DVPTest {
         LOGGER.info("DVP to update: " + dvp.toString());
 
         dvpRepository.findById(dvp.getId()).get().setVorname(new Vorname("Maximilian"));
-        dvpRepository.findById(dvp.getId()).get().setNachname(new Nachname("Muster"));
-        dvpRepository.findById(dvp.getId()).get().setBild(new Bild("Neuer Pfad"));
-        dvpRepository.findById(dvp.getId()).get().setAlter(new Alter(90));
-        dvpRepository.findById(dvp.getId()).get().setEinwilligung(new Einwilligung("Ich möchte das vielleicht."));
+//        dvpRepository.findById(dvp.getId()).get().setNachname(new Nachname("Muster"));
+//        dvpRepository.findById(dvp.getId()).get().setBild(new Bild("Neuer Pfad"));
+//        dvpRepository.findById(dvp.getId()).get().setAlter(new Alter(90));
+//        dvpRepository.findById(dvp.getId()).get().setEinwilligung(new Einwilligung("Ich möchte das vielleicht."));
 
-        dvp.getEreignisprotokoll().add(new Ereignis(new Timestamp(System.currentTimeMillis()), "Beschreibung"));
-        dvpRepository.findById(dvp.getId()).get().setEreignisprotokoll(dvp.getEreignisprotokoll());
-
-        assertEquals(dvpRepository.findById(dvp.getId()).get().getAlter(), new Alter(90));
+//        assertEquals(dvpRepository.findById(dvp.getId()).get().getAlter(), new Alter(90));
         assertEquals(dvpRepository.findById(dvp.getId()).get().getVorname(), new Vorname("Maximilian"));
-        assertEquals(dvpRepository.findById(dvp.getId()).get().getNachname(), new Nachname("Muster"));
-        assertEquals(dvpRepository.findById(dvp.getId()).get().getBild().getPfad(), "Neuer Pfad");
-        assertEquals(dvpRepository.findById(dvp.getId()).get().getEinwilligung().getText(), "Ich möchte das vielleicht.");
-        assertEquals(dvpRepository.findById(dvp.getId()).get().getEreignisprotokoll(), dvp.getEreignisprotokoll());
+//        assertEquals(dvpRepository.findById(dvp.getId()).get().getNachname(), new Nachname("Muster"));
+//        assertEquals(dvpRepository.findById(dvp.getId()).get().getBild().getPfad(), "Neuer Pfad");
+//        assertEquals(dvpRepository.findById(dvp.getId()).get().getEinwilligung().getText(), "Ich möchte das vielleicht.");
+//        assertEquals(dvpRepository.findById(dvp.getId()).get().getEreignisprotokoll(), dvp.getEreignisprotokoll());
 
         LOGGER.info("DVP was updated: " + dvp.toString());
     }
