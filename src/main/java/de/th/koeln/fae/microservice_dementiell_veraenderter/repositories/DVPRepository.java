@@ -6,8 +6,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 @RepositoryRestResource (path = "dvps")
-public interface DVPRepository extends CrudRepository<DementiellVeraenderter, Long> {
-
-    Iterable<DementiellVeraenderter> findAllById(Long id);
+public interface DVPRepository extends CrudRepository<DementiellVeraenderter, String> {
 
 }
