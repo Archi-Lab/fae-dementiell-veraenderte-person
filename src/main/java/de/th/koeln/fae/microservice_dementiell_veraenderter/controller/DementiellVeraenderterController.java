@@ -62,8 +62,6 @@ public class DementiellVeraenderterController {
             String dvpId = dvp.getId();
             resources.add(linkTo(methodOn(DementiellVeraenderterController.class).getDVPs()).slash(dvpId).withRel(dvpId));
         }
-
-        LOGGER.info("RETURN ALL PERSONS!");
         return  ResponseEntity.ok(resources);
 
     }
