@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
@@ -54,6 +56,12 @@ public class DementiellVeraenderterController {
         //resources.add(linkTo(methodOn(DementiellVeraenderterController.class).postDVP(null)).withRel("create"));
 
         //foreach --> person in personlist {resources.add(..(withRel("dvp"+person.getid));}
+
+        for (final DementiellVeraenderter dvp:personList
+        ) {
+            String dvpId = dvp.getId();
+            resources.add(linkTo(methodOn(DementiellVeraenderterController.class).getDVPs()).slash(dvpId).withRel(dvpId));
+        }
 
         LOGGER.info("RETURN ALL PERSONS!");
         return  ResponseEntity.ok(resources);
