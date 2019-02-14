@@ -8,9 +8,8 @@ services:
     ports:
     - "8020:8020"
     networks:
-    - fae-team-2-dementiell-veraenderte-person_dvp_ms_db
-    #- fae-message-broker_backend
-    - fae-message-broker_kafka-broker_backend
+    - dvp_ms_db
+    - fae-message-broker_backend
   # Spezifikation der Datenbank
   dvp_db:
     image: postgres:10.1 # Basis Image
@@ -24,11 +23,11 @@ services:
     - JAVA_TOOL_OPTIONS=-Xms128m -Xmx256m
     restart: always # Bei einem Absturz soll die DB immer neu starten.
     networks: # Netzwerk für die DB und dem Microservice
-    - fae-team-2-dementiell-veraenderte-person_dvp_ms_db
+    - dvp_ms_db
 volumes: # Allgemeine Volumes für das Projekt
   dvp_db: {}
 networks:
-  fae-team-2-dementiell-veraenderte-person_dvp_ms_db:
+  dvp_ms_db:
     driver: bridge
   fae-message-broker_backend:
     external: true
