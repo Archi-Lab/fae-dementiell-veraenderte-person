@@ -1,17 +1,11 @@
-package de.th.koeln.fae.microservice_dementiell_veraenderter.models;
+package de.th.koeln.fae.microservice_dementiell_veraenderter.models.DVP;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import de.th.koeln.fae.microservice_dementiell_veraenderter.infrastructure.eventing.EventSource;
-import org.hibernate.annotations.GenericGenerator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import de.th.koeln.fae.microservice_dementiell_veraenderter.models.EntityUUID4;
 import de.th.koeln.fae.microservice_dementiell_veraenderter.infrastructure.eventing.EventPublishingEntityListener;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.UUID;
 
 @Entity
 @EntityListeners(EventPublishingEntityListener.class)

@@ -1,17 +1,15 @@
 package de.th.koeln.fae.microservice_dementiell_veraenderter;
 
-import de.th.koeln.fae.microservice_dementiell_veraenderter.models.*;
+import de.th.koeln.fae.microservice_dementiell_veraenderter.models.DVP.*;
 import de.th.koeln.fae.microservice_dementiell_veraenderter.repositories.DVPRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 @Component
 public class SampleDataLoader implements ApplicationListener<ContextRefreshedEvent> {

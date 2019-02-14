@@ -1,6 +1,6 @@
-package de.th.koeln.fae.microservice_dementiell_veraenderter.controller;
+package de.th.koeln.fae.microservice_dementiell_veraenderter.infrastructure.controller;
 
-import de.th.koeln.fae.microservice_dementiell_veraenderter.models.DementiellVeraenderter;
+import de.th.koeln.fae.microservice_dementiell_veraenderter.models.DVP.DementiellVeraenderter;
 import de.th.koeln.fae.microservice_dementiell_veraenderter.repositories.DVPRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;

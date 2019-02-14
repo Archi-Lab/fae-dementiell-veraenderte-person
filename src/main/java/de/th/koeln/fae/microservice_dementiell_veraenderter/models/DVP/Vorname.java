@@ -1,4 +1,4 @@
-package de.th.koeln.fae.microservice_dementiell_veraenderter.models;
+package de.th.koeln.fae.microservice_dementiell_veraenderter.models.DVP;
 
 import lombok.Getter;
 import lombok.Setter;
