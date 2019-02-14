@@ -30,5 +30,5 @@ volumes: # Allgemeine Volumes für das Projekt
 networks:
   fae-team-2-dementiell-veraenderte-person_dvp_ms_db:
     driver: bridge
-  fae-message-broker_kafka-broker_backend:
+  fae-message-broker_backend:
     external: true

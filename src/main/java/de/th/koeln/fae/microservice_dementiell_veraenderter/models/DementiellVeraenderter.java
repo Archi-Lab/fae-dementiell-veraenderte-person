@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import de.th.koeln.fae.microservice_dementiell_veraenderter.infrastructure.eventing.EventPublishingEntityListener;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,9 +16,10 @@ import java.util.UUID;
 @Entity
 @EntityListeners(EventPublishingEntityListener.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DementiellVeraenderter implements EventSource {
+public class DementiellVeraenderter extends EntityUUID4 implements EventSource {
 
-    private static final Logger log = LoggerFactory.getLogger(DementiellVeraenderter.class);
+    public DementiellVeraenderter() {
+    }
 
     @Embedded
     private Vorname vorname;
@@ -28,14 +30,8 @@ public class DementiellVeraenderter implements EventSource {
     @Embedded
     private Alter alter;
 
-//    public DementiellVeraenderter() {
-//    }
-
-    @Id
-    private String id;
-
-    @Version
-    private Long version;
+    //Nicht Embedded, da Geschlecht ein Enum ist
+    private Geschlecht geschlecht;
 
     @Embedded
     private Einwilligung einwilligung;
@@ -46,6 +42,9 @@ public class DementiellVeraenderter implements EventSource {
     @Embedded
     private Tracker tracker;
 
+    @Version
+    private Long version;
+
     public Tracker getTracker() {
         return tracker;
     }
@@ -54,12 +53,12 @@ public class DementiellVeraenderter implements EventSource {
         this.tracker = tracker;
     }
 
-    public void setId (final String id) {this.id=id;}
+    // GETTER & SETTER
 
     public Vorname getVorname() { return vorname; }
 
     public void setVorname(Vorname vorname) { this.vorname = vorname; }
-//
+
     public Nachname getNachname() { return nachname; }
 
     public void setNachname(Nachname nachname) { this.nachname = nachname; }
@@ -68,8 +67,17 @@ public class DementiellVeraenderter implements EventSource {
 
     public void setAlter(Alter alter) { this.alter = alter; }
 
-    @Override
-    public String getId() {return id;}
+    public Einwilligung getEinwilligung() { return einwilligung; }
+
+    public void setEinwilligung(Einwilligung einwilligung) { this.einwilligung = einwilligung; }
+
+    public Bild getBild() { return bild; }
+
+    public void setBild(Bild bild) { this.bild = bild; }
+
+    public Geschlecht getGeschlecht() { return geschlecht; }
+
+    public void setGeschlecht(Geschlecht geschlecht) { this.geschlecht = geschlecht; }
 
     public void setVersion(Long version){
         this.version=version;
@@ -81,25 +89,7 @@ public class DementiellVeraenderter implements EventSource {
     }
 
     @Override
-    public String getAggregateName() {
-        return "dvp";
-    }
-
-    public Einwilligung getEinwilligung() {
-        return einwilligung;
-    }
-
-    public void setEinwilligung(Einwilligung einwilligung) {
-        this.einwilligung = einwilligung;
-    }
-
-    public Bild getBild() {
-        return bild;
-    }
-
-    public void setBild(Bild bild) {
-        this.bild = bild;
-    }
+    public String getAggregateName() { return "dvp";}
 
     @Override
     public String toString() {
