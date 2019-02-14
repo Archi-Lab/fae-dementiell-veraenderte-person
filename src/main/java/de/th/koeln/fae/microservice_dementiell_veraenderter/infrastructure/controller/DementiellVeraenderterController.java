@@ -57,7 +57,7 @@ public class DementiellVeraenderterController {
 
         for (final DementiellVeraenderter dvp:personList
         ) {
-            String dvpId = dvp.getId();
+            String dvpId = dvp.getId().toString();
             resources.add(linkTo(methodOn(DementiellVeraenderterController.class).getDVPs()).slash(dvpId).withRel(dvpId));
         }
         return  ResponseEntity.ok(resources);

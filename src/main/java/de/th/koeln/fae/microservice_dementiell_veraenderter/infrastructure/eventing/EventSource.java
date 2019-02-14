@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public interface EventSource {
     
-    String getId();
+    UUID getId();
     Long getVersion();
     String getAggregateName();
 

@@ -3,6 +3,12 @@ package de.th.koeln.fae.microservice_dementiell_veraenderter.models.DVP;
 import javax.persistence.Embeddable;
 import java.util.UUID;
 
+/*
+Value-Object im DVP-Aggregate (DVP <- Tracker)
+
+Der Tracker-Key muss der Tracker-ID entsprechen, die über die Draußen-Ortung Koordinaten versendet.
+Erhält die DVP einen neuen Tracker, muss der Tracker entsprechend aktualisiert werden.
+ */
 @Embeddable
 public class Tracker {
 

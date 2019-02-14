@@ -22,8 +22,8 @@ public class EntityUUID4 {
         this.id = UUID.randomUUID();
     }
 
-    public String getId() {
-        return this.id.toString();
+    public UUID getId() {
+        return this.id;
     }
 
     public void setId(final UUID id) {

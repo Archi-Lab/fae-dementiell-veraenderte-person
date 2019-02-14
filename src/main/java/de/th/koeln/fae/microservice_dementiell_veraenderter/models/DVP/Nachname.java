@@ -1,15 +1,13 @@
 package de.th.koeln.fae.microservice_dementiell_veraenderter.models.DVP;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.Embeddable;
 
+/*
+Value-Object im DVP-Aggregate (DVP <- Nachname)
+ */
 @Embeddable
 public class Nachname {
 
-    @Getter
-    @Setter
     private String nachname;
 
     public Nachname(){
@@ -34,5 +32,13 @@ public class Nachname {
     @Override
     public boolean equals(Object other){
         return other.getClass() == this.getClass() && ((Nachname) other).nachname.equals(this.nachname);
+    }
+
+    public String getNachname() {
+        return nachname;
+    }
+
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
     }
 }

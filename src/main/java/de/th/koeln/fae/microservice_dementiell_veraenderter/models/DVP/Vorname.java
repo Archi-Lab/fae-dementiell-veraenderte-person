@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.Embeddable;
 
+/*
+Value-Object im DVP-Aggregate (DVP <- Vorname)
+ */
 @Embeddable
 public class Vorname {
 

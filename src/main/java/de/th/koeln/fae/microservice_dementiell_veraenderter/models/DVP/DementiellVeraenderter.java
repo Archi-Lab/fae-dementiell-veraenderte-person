@@ -7,7 +7,15 @@ import de.th.koeln.fae.microservice_dementiell_veraenderter.infrastructure.event
 
 import javax.persistence.*;
 
+/*
+Aggregate-Root des DVP MS
+ */
 @Entity
+/*
+@EntityListeners: Diese Klasse soll über Eventing geteilt werden
+EventPublishingEntityListener.class: generische REWE-Digital Klasse zum erfassen
+                                     von "created", "updated" und "deleted" Events
+ */
 @EntityListeners(EventPublishingEntityListener.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DementiellVeraenderter extends EntityUUID4 implements EventSource {
@@ -39,15 +47,14 @@ public class DementiellVeraenderter extends EntityUUID4 implements EventSource {
     @Version
     private Long version;
 
-    public Tracker getTracker() {
-        return tracker;
+    @Override
+    public String toString() {
+        return "DementiellVeraenderter{" +
+                "vorname='" + vorname + '\'' +
+                '}';
     }
 
-    public void setTracker(Tracker tracker) {
-        this.tracker = tracker;
-    }
-
-    // GETTER & SETTER
+    ////////// GETTER & SETTER /////////////
 
     public Vorname getVorname() { return vorname; }
 
@@ -73,22 +80,15 @@ public class DementiellVeraenderter extends EntityUUID4 implements EventSource {
 
     public void setGeschlecht(Geschlecht geschlecht) { this.geschlecht = geschlecht; }
 
-    public void setVersion(Long version){
-        this.version=version;
-    }
+    public Tracker getTracker() { return tracker; }
+
+    public void setTracker(Tracker tracker) { this.tracker = tracker; }
+
+    public void setVersion(Long version){ this.version=version; }
 
     @Override
-    public Long getVersion() {
-        return version;
-    }
+    public Long getVersion() { return version; }
 
     @Override
     public String getAggregateName() { return "dvp";}
-
-    @Override
-    public String toString() {
-        return "DementiellVeraenderter{" +
-        "vorname='" + vorname + '\'' +
-        '}';
-    }
 }

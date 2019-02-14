@@ -2,6 +2,9 @@ package de.th.koeln.fae.microservice_dementiell_veraenderter.models.DVP;
 
 import javax.persistence.Embeddable;
 
+/*
+Value-Object im DVP-Aggregate (DVP <- Einwilligung)
+ */
 @Embeddable
 public class Einwilligung {
 
