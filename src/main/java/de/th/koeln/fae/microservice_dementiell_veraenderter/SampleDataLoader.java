@@ -23,7 +23,6 @@ public class SampleDataLoader implements ApplicationListener<ContextRefreshedEve
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         final DementiellVeraenderter dvp1 = new DementiellVeraenderter();
 
-        //dvp1.setId(UUID.randomUUID().toString());
         dvp1.setNachname(new Nachname("Mustermann"));
         dvp1.setVorname(new Vorname("Max"));
         dvp1.setAlter(new Alter(89));
@@ -36,31 +35,12 @@ public class SampleDataLoader implements ApplicationListener<ContextRefreshedEve
         final DementiellVeraenderter savedDvp = this.dvpRepository.save(dvp1);
 
 
-        /////////////////////////////////////////////
-
-
-        final DementiellVeraenderter dvp3 = new DementiellVeraenderter();
-
-        //dvp3.setId(UUID.randomUUID().toString());
-        dvp3.setNachname(new Nachname("Kolumna"));
-        dvp3.setVorname(new Vorname("Karla"));
-        dvp3.setAlter(new Alter(65));
-        dvp3.setGeschlecht(Geschlecht.F);
-        dvp3.setBild(new Bild("Pfad"));
-        dvp3.setEinwilligung(new Einwilligung("Brauchte ich nie!"));
-        dvp3.setTracker(new Tracker(UUID.fromString("1df2d81d-c7d0-3981-9049-45af8f76fb6a")));
-        dvp3.setVersion(0L);
-
-        this.dvpRepository.save(dvp3);
-
-
 
         /////////////////////////////////////////////////
 
 
         final DementiellVeraenderter dvp2 = new DementiellVeraenderter();
 
-        //dvp2.setId(UUID.randomUUID().toString());
         dvp2.setNachname(new Nachname("Toni"));
         dvp2.setVorname(new Vorname("Taco"));
         dvp2.setAlter(new Alter(177));
@@ -71,6 +51,23 @@ public class SampleDataLoader implements ApplicationListener<ContextRefreshedEve
         dvp2.setVersion(0L);
 
         this.dvpRepository.save(dvp2);
+
+
+        /////////////////////////////////////////////
+
+
+        final DementiellVeraenderter dvp3 = new DementiellVeraenderter();
+
+        dvp3.setNachname(new Nachname("Kolumna"));
+        dvp3.setVorname(new Vorname("Karla"));
+        dvp3.setAlter(new Alter(65));
+        dvp3.setGeschlecht(Geschlecht.F);
+        dvp3.setBild(new Bild("Pfad"));
+        dvp3.setEinwilligung(new Einwilligung("Brauchte ich nie!"));
+        dvp3.setTracker(new Tracker(UUID.fromString("1df2d81d-c7d0-3981-9049-45af8f76fb6a")));
+        dvp3.setVersion(0L);
+
+        this.dvpRepository.save(dvp3);
 
 
     }
