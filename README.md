@@ -1,3 +1,8 @@
+# Requirements
+
+* [Maven](https://maven.apache.org/install.html)
+* [Docker](https://www.docker.com/)
+
 # Dementiell Veränderte Person
 
 Projekt bauen
