@@ -2,8 +2,8 @@ package de.th.koeln.fae.microservice_dementiell_veraenderter.models.DVP;
 
 import javax.persistence.*;
 
-/*
-Value-Object im DVP-Aggregate (DVP <- Bild)
+/**
+Attribut Bild der DVP Entität sowie Value-Object im DVP-Aggregate. Wird durch diese Klasse explizit gemacht.
 
 Das Bild wird als Ressource abgelegt. Dieses Objekt soll einen relativen Pfad zu der Ressource enthalten (als String)
  */
@@ -26,4 +26,5 @@ public class Bild {
     public void setPfad(String pfad) {
         this.pfad = pfad;
     }
+
 }

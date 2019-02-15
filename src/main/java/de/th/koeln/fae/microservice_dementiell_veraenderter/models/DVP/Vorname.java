@@ -1,33 +1,42 @@
 package de.th.koeln.fae.microservice_dementiell_veraenderter.models.DVP;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.Embeddable;
 
-/*
-Value-Object im DVP-Aggregate (DVP <- Vorname)
+/**
+ Attribut Vorname der DVP Entität sowie Value-Object im DVP-Aggregate. Wird durch diese Klasse explizit gemacht.
  */
 @Embeddable
 public class Vorname {
 
-    @Getter
-    @Setter
     private String vorname;
 
+    //region Konstruktoren
     public Vorname(){
 
     }
 
     public Vorname(String vorname){
-        //darf keine Numerischen Zeichen enthalten
+
+        //Verwendung eines Regex, um nur Nachnamen bestehend aus Groß- bzw. Kleinbuchstaben zu akzeptieren
         String expression = "^[a-zA-Z\\s]+";
         if(!vorname.matches(expression)){
             throw new IllegalArgumentException("Ein Vorname darf nur aus Groß- bzw. Kleinbuchstaben bestehen.");
         }
         this.vorname = vorname;
     }
+    //endregion
 
+    //region Getter,Setter
+    public String getVorname() {
+        return vorname;
+    }
+
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+    //endregion
+
+    //region Override-Methoden
     @Override
     public String toString() {
         return "Vorname{" +
@@ -39,4 +48,5 @@ public class Vorname {
     public boolean equals(Object other){
         return other.getClass() == this.getClass() && ((Vorname) other).vorname.equals(this.vorname);
     }
+    //endregion
 }

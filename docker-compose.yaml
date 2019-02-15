@@ -1,32 +1,32 @@
 version: '2.2'
 services:
-  # Spezifikation des Kalender MS
+# Spezifikation der Services
   dvp:
-    build: .
-    depends_on:
+    build: . # Der Service basiert auf einem Dockerfile in dem directory "."
+    depends_on: # Der Service wartet auf den Start der DB.
     - dvp_db
-    ports:
-    - "8020"
-    networks:
+    ports: # Ports des Service die an die Host-Maschine übertragen werden.
+    - 8020
+    networks: # Neztwerk für DB und MS sowie für den Message-Broker
     - dvp_ms_db
     - fae-message-broker_backend
   # Spezifikation der Datenbank
   dvp_db:
-    image: postgres:10.1 # Basis Image
+    image: postgres:10.1 # Verwendung eines Postgres image
     volumes:
-    - dvp_db:/var/lib/postgresql/data # Volume um Daten persistent zu speichern. Alle Daten aus dem Pfad (rechts) werden in das Volume abgelegt.
-    environment: # Konfiguration über env-Variablen
+    - dvp_db:/var/lib/postgresql/data # Volume um Daten persistent zu speichern.
+    environment: # Konfiguration der Datenbank über env-Variablen
     - POSTGRES_PASSWORD=_dvpService_2018
     - POSTGRES_USER=dvpService
     - POSTGRES_DB=dvpService
     - PGDATA=/var/lib/postgresql/data/pgdata
     - JAVA_TOOL_OPTIONS=-Xms128m -Xmx256m
     restart: always # Bei einem Absturz soll die DB immer neu starten.
-    networks: # Netzwerk für die DB und dem Microservice
+    networks: # Netzwerk für die DB und den MS
     - dvp_ms_db
 volumes: # Allgemeine Volumes für das Projekt
   dvp_db: {}
-networks:
+networks: # Allgemeine Netzwerke für das Projekt
   dvp_ms_db:
     driver: bridge
   fae-message-broker_backend:
