@@ -12,7 +12,6 @@ Aggregate-Root des DVP MS
  */
 @Entity
 /*
-@EntityListeners: Diese Klasse soll über Eventing geteilt werden
 EventPublishingEntityListener.class: generische REWE-Digital Klasse zum erfassen
                                      von "created", "updated" und "deleted" Events
  */
@@ -45,7 +44,7 @@ public class DementiellVeraenderter extends EntityUUID4 implements EventSource {
     private Tracker tracker;
 
     @Version
-    private Long version;
+    private Long version=0L;
 
     @Override
     public String toString() {
