@@ -7,14 +7,14 @@ import de.th.koeln.fae.microservice_dementiell_veraenderter.infrastructure.event
 
 import javax.persistence.*;
 
-/*
+/**
 Aggregate-Root des DVP MS
  */
 @Entity
-/*
-@EntityListeners: Diese Klasse soll über Eventing geteilt werden
-EventPublishingEntityListener.class: generische REWE-Digital Klasse zum erfassen
-                                     von "created", "updated" und "deleted" Events
+/**
+EventPublishingEntityListener.class ist eine generische REWE-Digital Klasse zum erfassen von "created",
+"updated" und "deleted" Events.
+Triggert das publishen des Kalenders bei einem der oben genannten Aktionen.
  */
 @EntityListeners(EventPublishingEntityListener.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -23,6 +23,7 @@ public class DementiellVeraenderter extends EntityUUID4 implements EventSource {
     public DementiellVeraenderter() {
     }
 
+    //region Attribute
     @Embedded
     private Vorname vorname;
 
@@ -32,7 +33,7 @@ public class DementiellVeraenderter extends EntityUUID4 implements EventSource {
     @Embedded
     private Alter alter;
 
-    //Nicht Embedded, da Geschlecht ein Enum ist
+    //Nicht Embedded, da das Geschlecht ein Enum ist
     private Geschlecht geschlecht;
 
     @Embedded
@@ -46,16 +47,9 @@ public class DementiellVeraenderter extends EntityUUID4 implements EventSource {
 
     @Version
     private Long version;
+    //endregion
 
-    @Override
-    public String toString() {
-        return "DementiellVeraenderter{" +
-                "vorname='" + vorname + '\'' +
-                '}';
-    }
-
-    ////////// GETTER & SETTER /////////////
-
+    //region Getter,Setter
     public Vorname getVorname() { return vorname; }
 
     public void setVorname(Vorname vorname) { this.vorname = vorname; }
@@ -85,10 +79,20 @@ public class DementiellVeraenderter extends EntityUUID4 implements EventSource {
     public void setTracker(Tracker tracker) { this.tracker = tracker; }
 
     public void setVersion(Long version){ this.version=version; }
+    //endregion
 
+    //region Override-Methoden
     @Override
     public Long getVersion() { return version; }
 
     @Override
     public String getAggregateName() { return "dvp";}
+
+    @Override
+    public String toString() {
+        return "DementiellVeraenderter{" +
+                "vorname='" + vorname + '\'' +
+                '}';
+    }
+    //endregion
 }

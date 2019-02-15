@@ -36,3 +36,5 @@ docker-compose up --scale dvp=2
 ## Acknowledgements
 
 * Der Eventing Code wurde von [REWE Digital](https://github.com/rewe-digital/integration-patterns) übernommen.
+* Die EntityUUID4 Klasse wurde von [Team 4](https://github.com/Archi-Lab/fae-team-4) übernommen. 
+* Das docker-compose File ist an das vom [sample-microservice](https://github.com/Archi-Lab/sample-microservice) angelehnt.
