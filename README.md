@@ -15,7 +15,7 @@ und dem allgemeinen Aufbau befinden sich im
 
 Projekt bauen
 ```
-$ mvn install -DskipTests=true
+mvn install -DskipTests=true
 ```
 
 Docker Image bauen:
