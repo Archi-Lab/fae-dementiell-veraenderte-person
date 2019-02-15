@@ -1,9 +1,17 @@
-# Requirements
+# Dementiell Veränderte Person
+
+Dies ist der Microservice zur Verwaltung von dementiell veränderten Personen (DVP). 
+Eine DVP hat die üblichen Attribute einer Person, sowie die ID des Ortungsmoduls 
+der Schuhsohle. Weitere Informationen zu Details, wie der REST-API dem Eventing 
+und dem allgemeinen Aufbau befinden sich im 
+[Wiki](https://github.com/Archi-Lab/fae-team-2-dementiell-veraenderte-person/wiki).
+
+## Prerequisites
 
 * [Maven](https://maven.apache.org/install.html)
 * [Docker](https://www.docker.com/)
 
-# Dementiell Veränderte Person
+## Getting Started
 
 Projekt bauen
 ```
@@ -22,5 +30,9 @@ docker-compose up
 
 Mehrere Docker Container starten:
 ```
-docker-compose up --scale dvp=X
+docker-compose up --scale dvp=2
 ```
+
+## Acknowledgements
+
+* Der Eventing Code wurde von [REWE Digital](https://github.com/rewe-digital/integration-patterns) übernommen.

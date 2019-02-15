@@ -2,8 +2,6 @@ package de.th.koeln.fae.microservice_dementiell_veraenderter;
 
 import de.th.koeln.fae.microservice_dementiell_veraenderter.models.DVP.*;
 import de.th.koeln.fae.microservice_dementiell_veraenderter.repositories.DVPRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -16,8 +14,6 @@ public class SampleDataLoader implements ApplicationListener<ContextRefreshedEve
 
     @Autowired
     private DVPRepository dvpRepository;
-
-    private static final Logger log = LoggerFactory.getLogger(SampleDataLoader.class);
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
