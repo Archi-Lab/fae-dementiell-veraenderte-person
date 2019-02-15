@@ -9,6 +9,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+/**
+ Wird verwendet, um Beispieldaten zu erzeugen und in der Datenbank zu speichern.
+ */
+
 @Component
 public class SampleDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -17,6 +21,8 @@ public class SampleDataLoader implements ApplicationListener<ContextRefreshedEve
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+
+        //erstellt und speichert dvp1
         final DementiellVeraenderter dvp1 = new DementiellVeraenderter();
 
         dvp1.setNachname(new Nachname("Mustermann"));
@@ -30,11 +36,7 @@ public class SampleDataLoader implements ApplicationListener<ContextRefreshedEve
 
         final DementiellVeraenderter savedDvp = this.dvpRepository.save(dvp1);
 
-
-
-        /////////////////////////////////////////////////
-
-
+        //erstellt und speichert dvp2
         final DementiellVeraenderter dvp2 = new DementiellVeraenderter();
 
         dvp2.setNachname(new Nachname("Toni"));
@@ -48,10 +50,7 @@ public class SampleDataLoader implements ApplicationListener<ContextRefreshedEve
 
         this.dvpRepository.save(dvp2);
 
-
-        /////////////////////////////////////////////
-
-
+        //erstellt und speichert dvp3
         final DementiellVeraenderter dvp3 = new DementiellVeraenderter();
 
         dvp3.setNachname(new Nachname("Kolumna"));
@@ -64,7 +63,5 @@ public class SampleDataLoader implements ApplicationListener<ContextRefreshedEve
         dvp3.setVersion(0L);
 
         this.dvpRepository.save(dvp3);
-
-
     }
 }

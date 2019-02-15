@@ -8,12 +8,17 @@ import javax.persistence.MappedSuperclass;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+/**
+ Um einer Klasse eine UUID hinzuzufügen, muss diese mit EntityUUID4 extended werden.
+ Macht die Verwendung von UUIDs explizit.
+ */
 @MappedSuperclass
 public class EntityUUID4 {
 
     @Id
     private UUID id;
 
+    //region Konstruktoren
     public EntityUUID4(final UUID id) {
         this.id = id;
     }
@@ -21,7 +26,9 @@ public class EntityUUID4 {
     public EntityUUID4() {
         this.id = UUID.randomUUID();
     }
+    //endregion
 
+    //region Getter,Setter
     public UUID getId() {
         return this.id;
     }
@@ -29,7 +36,9 @@ public class EntityUUID4 {
     public void setId(final UUID id) {
         this.id = id;
     }
+    //endregion
 
+    //region Override-Methoden
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -55,4 +64,5 @@ public class EntityUUID4 {
 
         return hcb.toHashCode();
     }
+    //endregion
 }
