@@ -47,6 +47,7 @@ public class DementiellVeraenderter extends EntityUUID4 implements EventSource {
 
     @Version
     private Long version=0L;
+    //endregion
 
     //region Getter,Setter
     public Vorname getVorname() { return vorname; }
