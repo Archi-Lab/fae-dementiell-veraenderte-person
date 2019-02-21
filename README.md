@@ -33,6 +33,8 @@ Mehrere Docker Container starten:
 docker-compose up --scale dvp=2
 ```
 
+Belegter Port: 8020
+
 ## Acknowledgements
 
 * Der Eventing Code wurde von [REWE Digital](https://github.com/rewe-digital/integration-patterns) übernommen.
