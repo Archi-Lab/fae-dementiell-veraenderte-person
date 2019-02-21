@@ -1,5 +1,6 @@
 package de.th.koeln.fae.microservice_dementiell_veraenderter.models.DVP;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import de.th.koeln.fae.microservice_dementiell_veraenderter.infrastructure.eventing.EventSource;
 import de.th.koeln.fae.microservice_dementiell_veraenderter.models.EntityUUID4;
@@ -45,6 +46,7 @@ public class DementiellVeraenderter extends EntityUUID4 implements EventSource {
     @Embedded
     private Tracker tracker;
 
+    @JsonIgnore
     @Version
     private Long version;
     //endregion
