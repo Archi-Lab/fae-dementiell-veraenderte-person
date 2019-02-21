@@ -46,7 +46,7 @@ public class DementiellVeraenderter extends EntityUUID4 implements EventSource {
     private Tracker tracker;
 
     @Version
-    private Long version=0L;
+    private Long version;
     //endregion
 
     //region Getter,Setter

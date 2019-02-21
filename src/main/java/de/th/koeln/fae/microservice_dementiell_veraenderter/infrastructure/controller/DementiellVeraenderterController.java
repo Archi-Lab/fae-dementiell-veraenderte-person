@@ -2,19 +2,11 @@ package de.th.koeln.fae.microservice_dementiell_veraenderter.infrastructure.cont
 
 import de.th.koeln.fae.microservice_dementiell_veraenderter.models.DVP.DementiellVeraenderter;
 import de.th.koeln.fae.microservice_dementiell_veraenderter.repositories.DVPRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.ResourceProcessor;
 import org.springframework.hateoas.Resources;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -22,7 +14,6 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RepositoryRestController
 public class DementiellVeraenderterController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DementiellVeraenderterController.class);
     private final DVPRepository dvpRepository;
 
     @Autowired
@@ -30,20 +21,11 @@ public class DementiellVeraenderterController {
         this.dvpRepository = dvpRepository;
     }
 
-    @Bean
-    public ResourceProcessor<Resources<DementiellVeraenderter>> personProcessor() {
-
-        return new ResourceProcessor<Resources<DementiellVeraenderter>>() {
-
-            @Override
-            public Resources<DementiellVeraenderter> process(Resources<DementiellVeraenderter> resource) {
-                resource.add(new Link(resource.getLink(Link.REL_SELF).getHref() + "dvps/{dvpid}", "dvp"));
-
-                return resource;
-            }
-        };
-    }
-
+    /**
+     * Diese Methode  soll die "normale" get all methode dadurch ergänzen, dass ein Link zu jeder DVP mit zurückgegeben wird.
+     *
+     * @return Alle DVP Objekte und Links ind der Form dvpid: linkto(dvp)
+     */
     @GetMapping(path = "/dvps")
     public ResponseEntity<?> getDVPs(){
         final Iterable<DementiellVeraenderter> personList = this.dvpRepository.findAll();
@@ -51,9 +33,6 @@ public class DementiellVeraenderterController {
         Resources<DementiellVeraenderter> resources = new Resources<>(personList);
 
         resources.add(linkTo(methodOn(DementiellVeraenderterController.class).getDVPs()).withSelfRel());
-        //resources.add(linkTo(methodOn(DementiellVeraenderterController.class).postDVP(null)).withRel("create"));
-
-        //foreach --> person in personlist {resources.add(..(withRel("dvp"+person.getid));}
 
         for (final DementiellVeraenderter dvp:personList
         ) {
@@ -63,20 +42,4 @@ public class DementiellVeraenderterController {
         return  ResponseEntity.ok(resources);
 
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                              POST MAPPINGS                                                                     //
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @PostMapping(path = "/dvps")
-    public ResponseEntity<DementiellVeraenderter> postDVP(@RequestBody DementiellVeraenderter newDVP){
-        LOGGER.info("CREATED NEW PERSON!");
-        return new ResponseEntity<>(dvpRepository.save(newDVP), HttpStatus.CREATED);
-    }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                              PUT MAPPINGS                                                                     //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 }
